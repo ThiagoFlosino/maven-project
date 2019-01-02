@@ -29,9 +29,9 @@ pipeline {
                 stage ('Deploy to Staging'){
                     steps {
                         if (isUnix()) {
-                            sh "scp -i C:\Users\ThiagoLeite\Downloads/tomcat-demo.pem **/target/*.war ec2-user@${params.tomcat_dev}:/var/lib/tomcat/webapps"
+                            sh "scp -i C:/Users/ThiagoLeite/Downloads/tomcat-demo.pem **/target/*.war ec2-user@${params.tomcat_dev}:/var/lib/tomcat/webapps"
                         } else {
-                            bat("scp -i C:\Users\ThiagoLeite\Downloads/tomcat-demo.pem **/target/*.war ec2-user@${params.tomcat_dev}:/var/lib/tomcat/webapps")
+                            bat("scp -i C:/Users/ThiagoLeite/Downloads/tomcat-demo.pem **/target/*.war ec2-user@${params.tomcat_dev}:/var/lib/tomcat/webapps")
                         }
                     }
                 }
@@ -39,9 +39,9 @@ pipeline {
                 stage ("Deploy to Production"){
                     steps {
                         if (isUnix()) {
-                            sh "scp -i C:\Users\ThiagoLeite\Downloads/tomcat-demo.pem **/target/*.war ec2-user@${params.tomcat_prod}:/var/lib/tomcat/webapps"
+                            sh "scp -i C:/Users/ThiagoLeite/Downloads/tomcat-demo.pem **/target/*.war ec2-user@${params.tomcat_prod}:/var/lib/tomcat/webapps"
                         } else {
-                            bat("scp -i C:\Users\ThiagoLeite\Downloads/tomcat-demo.pem **/target/*.war ec2-user@${params.tomcat_prod}:/var/lib/tomcat/webapps")
+                            bat("scp -i C:/Users/ThiagoLeite/Downloads/tomcat-demo.pem **/target/*.war ec2-user@${params.tomcat_prod}:/var/lib/tomcat/webapps")
                         }
                     }
                 }
