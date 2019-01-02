@@ -10,12 +10,10 @@ pipeline {
     }
     stages{
         stage('Build'){
-            steps {
-                if (isUnix()) {
-                    sh "mvn clean packege"
-                } else{
-                    bat('mvn clean package')
-                }
+            if (isUnix()) {
+                sh "mvn clean packege"
+            } else{
+                bat('mvn clean package')
             }
             post {
                 success {
@@ -27,22 +25,18 @@ pipeline {
         stage ('Deployments'){
             parallel{
                 stage ('Deploy to Staging'){
-                    steps {
-                        if (isUnix()) {
-                            sh "scp -i C:/Users/ThiagoLeite/Downloads/tomcat-demo.pem **/target/*.war ec2-user@${params.tomcat_dev}:/var/lib/tomcat/webapps"
-                        } else {
-                            bat("scp -i C:/Users/ThiagoLeite/Downloads/tomcat-demo.pem **/target/*.war ec2-user@${params.tomcat_dev}:/var/lib/tomcat/webapps")
-                        }
+                    if (isUnix()) {
+                        sh "scp -i C:/Users/ThiagoLeite/Downloads/tomcat-demo.pem **/target/*.war ec2-user@${params.tomcat_dev}:/var/lib/tomcat/webapps"
+                    } else {
+                        bat("scp -i C:/Users/ThiagoLeite/Downloads/tomcat-demo.pem **/target/*.war ec2-user@${params.tomcat_dev}:/var/lib/tomcat/webapps")
                     }
                 }
 
                 stage ("Deploy to Production"){
-                    steps {
-                        if (isUnix()) {
-                            sh "scp -i C:/Users/ThiagoLeite/Downloads/tomcat-demo.pem **/target/*.war ec2-user@${params.tomcat_prod}:/var/lib/tomcat/webapps"
-                        } else {
-                            bat("scp -i C:/Users/ThiagoLeite/Downloads/tomcat-demo.pem **/target/*.war ec2-user@${params.tomcat_prod}:/var/lib/tomcat/webapps")
-                        }
+                    if (isUnix()) {
+                        sh "scp -i C:/Users/ThiagoLeite/Downloads/tomcat-demo.pem **/target/*.war ec2-user@${params.tomcat_prod}:/var/lib/tomcat/webapps"
+                    } else {
+                        bat("scp -i C:/Users/ThiagoLeite/Downloads/tomcat-demo.pem **/target/*.war ec2-user@${params.tomcat_prod}:/var/lib/tomcat/webapps")
                     }
                 }
             }
