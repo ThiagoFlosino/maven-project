@@ -1,9 +1,7 @@
 pipeline {
     agent any
-    stage('Build'){
-        if (isUnix()) {
-            sh "mvn clean packege"
-        } else{
+    stages{
+        stage('Build'){
             bat('mvn clean package')
         }
     }
