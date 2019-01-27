@@ -3,7 +3,6 @@ pipeline {
     stages {
         stage('Build'){
             steps {
-                echo "${env.BUILD_ID}"
                 bat 'mvn clean package'
                 bat "docker build . -t tomcatwebapp:VERSAO_${env.BUILD_ID}"
             }
